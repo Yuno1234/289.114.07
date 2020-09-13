@@ -15,8 +15,10 @@ brushshape = ROUND
 brushsize = 3
 painting = False
 paintmode = 'free'
+
 clearall = False
     
+
 def draw():
     global painting, paintmode
     
@@ -33,7 +35,7 @@ def draw():
             strokeCap(brushshape)
             strokeWeight(brushsize)
             line(pmouseX, pmouseY, mouseX, mouseY)
-            
+
     # black panel
     noStroke()
     fill('#000000')
@@ -46,13 +48,22 @@ def draw():
     fill(rainbow[3]); rect(30, 0, 30, 30)
     fill(rainbow[4]); rect(30, 30, 30, 30)
     fill(rainbow[5]); rect(30, 60, 30, 30)
-    
+
+
     # brush preview
     fill(brushcolor)
     if brushshape == ROUND:
         circle(30, 123, brushsize)
     paintmode = 'free'
 
+    #eraser button
+    fill('#FFFFFF')
+    text('eraser', 8, 170)
+    
+    # rectangle button
+    fill('#FFFFFF')
+    text('rect', 8, 200)
+    
     # clear button
     global clearall
     fill('#FFFFFF')
@@ -62,7 +73,8 @@ def draw():
         fill('#004477')
         rect(60, 0, width, height)
         clearall = False
-    
+
+
 def mousePressed():
     global brushcolor, brushshape, brushsize, clearall
     
@@ -89,11 +101,16 @@ def mousePressed():
                 brushcolor = rainbow[4]
             elif mouseY < 90:
                 brushcolor = rainbow[5]
-        
+            elif mouseY > 150 and mouseY < 175:
+                brushcolor = '#004477'
+                fill('#000000')
+
+
 def mouseReleased():
     noLoop()
     global painting
     painting = False
+
 
 def mouseWheel(e):
     print(e)
